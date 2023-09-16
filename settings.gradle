@@ -1,0 +1,5 @@
+include ':app', ':ly-asset-login'
+rootProject.name='WanAndroidLY'
+include ':ly-base-pubcomp'
+include ':ly-base-router'
+include ':ly-base-routes'
