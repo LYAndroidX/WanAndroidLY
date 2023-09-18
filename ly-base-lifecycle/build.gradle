@@ -1,0 +1,65 @@
+def isComponentDebug = false
+def root = rootProject.ext
+if(isComponentDebug){
+    //构建后输出一个 APK 安装包
+    apply plugin: 'com.android.application'
+}else{
+    //构建后输出 ARR 包
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdk root.android.compileSdkVersion
+    defaultConfig {
+        if(isComponentDebug){
+            //独立调试的时候才能设置applicationId
+            applicationId "com.ly.ly_base_lifecycle"
+        }
+        minSdkVersion root.android.minSdkVersion
+        targetSdkVersion root.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility root.compileOptions.sourceCompatibility
+        targetCompatibility root.compileOptions.targetCompatibility
+    }
+    sourceSets {
+        main {
+            if (isComponentDebug) {
+                //独立调试
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                res.srcDirs = ['src/main/res',
+                               'src/main/res-test']//独立调试的时候包含测试布局文件，集成调试的时候不包含
+            } else {
+                //集成调试
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    // 忽略所有的 src/main/java/test目录
+                    exclude '**/MainActivity.java'//独立调试的时候包含测试MainActivity类，集成调试的时候不包含
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+
+    implementation root.dependencies.appcompat
+    implementation root.dependencies.material
+    implementation root.dependencies.constraintlayout
+    testImplementation root.dependencies.junit
+    androidTestImplementation root.dependencies.androidJunit
+    androidTestImplementation root.dependencies.androidEspressoCore
+    implementation root.dependencies.lifecycleExtensions
+    api root.dependencies.gson
+    api project(':ly-base-routes')
+}

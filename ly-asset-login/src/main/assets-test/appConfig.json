@@ -1,0 +1,8 @@
+[
+  {
+    "name": "登录",
+    "id": "ly_asset_login",
+    "desc": "登录资产",
+    "applicationClassName": "com.ly.ly_asset_login.code.app.LoginApplication"
+  }
+]

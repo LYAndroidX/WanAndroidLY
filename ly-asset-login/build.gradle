@@ -34,8 +34,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility root.compileOptions.sourceCompatibility
+        targetCompatibility root.compileOptions.targetCompatibility
     }
     sourceSets {
         main {
@@ -44,6 +44,8 @@ android {
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
                 res.srcDirs = ['src/main/res',
                                'src/main/res-test']//独立调试的时候包含测试布局文件，集成调试的时候不包含
+                assets.srcDirs = ['src/main/assets',
+                                  'src/main/assets-test']//独立调试的时候包含测试的一些资源文件，集成调试的时候不包含
             } else {
                 //集成调试
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -58,12 +60,12 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation root.dependencies.appcompat
+    implementation root.dependencies.material
+    implementation root.dependencies.constraintlayout
+    testImplementation root.dependencies.junit
+    androidTestImplementation root.dependencies.androidJunit
+    androidTestImplementation root.dependencies.androidEspressoCore
     api project(':ly-base-pubcomp')
-    annotationProcessor root.libARouterCompiler
+    annotationProcessor root.dependencies.arouterCompiler
 }

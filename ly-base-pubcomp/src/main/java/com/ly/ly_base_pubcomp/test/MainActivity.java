@@ -1,8 +1,10 @@
-package com.ly.ly_base_pubcomp;
+package com.ly.ly_base_pubcomp.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.ly.ly_base_pubcomp.R;
 
 public class MainActivity extends AppCompatActivity {
 
