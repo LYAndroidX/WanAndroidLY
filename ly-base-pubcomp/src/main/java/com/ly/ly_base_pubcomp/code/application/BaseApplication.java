@@ -1,31 +1,42 @@
 package com.ly.ly_base_pubcomp.code.application;
 
-import android.app.Application;
-import android.content.pm.ApplicationInfo;
+import android.annotation.SuppressLint;
+import android.content.Context;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.ly.ly_base_lifecycle.code.AppLifeCycleManage;
+import com.ly.ly_base_pubcomp.code.utils.ActivityManager;
 
-public class BaseApplication extends Application {
+/**
+ * 工程管理
+ */
+public class BaseApplication extends CompBaseApplication {
+
+    private static ActivityManager activityManager;
+    @SuppressLint("StaticFieldLeak")
+    private  static BaseApplication application;
+    @SuppressLint("StaticFieldLeak")
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        AppLifeCycleManage.init(this);
-        if (isDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
-            ARouter.openLog();     // 打印日志
-            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-        }
-        ARouter.init(this); // 尽可能早，推荐在Application中初始化
+        //声明Activity管理
+        activityManager=new ActivityManager();
+        context = getApplicationContext();
+        application=this;
+
     }
 
-    private boolean isDebug() {
-        try {
-            ApplicationInfo info = this.getApplicationInfo();
-            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        } catch (Exception e) {
-            return false;
-        }
+    public static ActivityManager getActivityManager() {
+        return activityManager;
     }
 
+    //内容提供器
+    public static Context getContext(){
+        return context;
+    }
+
+    public static BaseApplication getApplication() {
+        return application;
+    }
 }
+

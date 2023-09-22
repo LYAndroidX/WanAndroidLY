@@ -66,6 +66,6 @@ dependencies {
     testImplementation root.dependencies.junit
     androidTestImplementation root.dependencies.androidJunit
     androidTestImplementation root.dependencies.androidEspressoCore
-    api project(':ly-base-pubcomp')
     annotationProcessor root.dependencies.arouterCompiler
+    api project(':ly-asset-common')
 }

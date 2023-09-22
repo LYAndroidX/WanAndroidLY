@@ -18,6 +18,16 @@ ext{
             "arouterCompiler"       :'com.alibaba:arouter-compiler:1.5.2',
             "gson"                  :'com.google.code.gson:gson:2.8.9',
             "lifecycleExtensions"   :'androidx.lifecycle:lifecycle-extensions:2.2.0',
+            "okhttp"                :'com.squareup.okhttp3:okhttp:3.14.9',
+            "retrofit"              :'com.squareup.retrofit2:retrofit:2.9.0',
+            "converterGson"         :'com.squareup.retrofit2:converter-gson:2.9.0',
+            "loggingInterceptor"    :'com.squareup.okhttp3:logging-interceptor:3.10.0',
+            "adapterRxjava2"        :'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+            "rxandroid"             :'io.reactivex.rxjava2:rxandroid:2.1.1',
+            "rxjava"                :'io.reactivex.rxjava2:rxjava:2.2.12',
+            "glide"                 :'com.github.bumptech.glide:glide:3.7.0',
+            "androidSupport"        :'com.android.support:support-v4:25.3.1',
+            "glideTransformations"  :'jp.wasabeef:glide-transformations:2.0.2',
     ]
     compileOptions = [
             "sourceCompatibility" :JavaVersion.VERSION_1_8,
